@@ -2581,8 +2581,10 @@ class PHPMailer
                 $result .= $this->textLine(' boundary="' . $this->boundary[1] . '"');
                 break;
             default:
-                //Catches case 'plain': and case '':
-                $result .= $this->textLine('Content-Type: ' . $this->ContentType . '; charset=' . $this->CharSet);
+                // Catches case 'plain': and case '':
+				if (!empty($this->CharSet)) {
+					$result .= $this->textLine('Content-Type: ' . $this->ContentType . '; charset=' . $this->CharSet);
+				}
                 $ismultipart = false;
                 break;
         }
